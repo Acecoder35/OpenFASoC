@@ -1,5 +1,4 @@
 # AUX CELL GENERATION FOR - OpenFASoC(Fully Open-Source Autonomous SoC)
-> This Flow Still under development*
 
 ## GENERATING .lef, .gds for Aux cells
 
@@ -102,17 +101,8 @@ schematic2layout.py ../ALIGN-pdk-sky130/examples/five_transistor_ota -p ../pdks/
 
 #### FLOW
 
-Creating a Python virtualenv
-
-![image_2022-11-04_13-58-54](https://user-images.githubusercontent.com/110079648/199928893-d6f7f7cd-61a1-498f-afed-13cbc0914e31.png)
-
-Running design
-
-![image_2022-11-04_13-58-29](https://user-images.githubusercontent.com/110079648/199929139-1f75be9d-d8a9-4630-833d-9055165157c3.png)
-
-![image_2022-11-04_13-59-33](https://user-images.githubusercontent.com/110079648/199929188-936b7d63-97af-4d9f-862d-63b2e88e8227.png)
-
-![image_2022-11-04_14-00-21](https://user-images.githubusercontent.com/110079648/199929296-308b4efa-429e-4ca6-a892-24bab448cbb8.png)
+Create a Python virtual environment
+Now Running design we get-
 
 
 #### Generated .lef and .gds files for example (using Sky130pdk)
@@ -167,33 +157,20 @@ Source Repo for SPICE FILES - https://github.com/lakshmi-sathi/avsdpll_1v8
 
 ```
 .subckt cp dn out up vdd vss
-
-m1 in_2 in_2 vdd vdd sky130_fd_pr__pfet_01v8 L=150n W=420n
-
-m2 in_3 in_2 vdd vdd sky130_fd_pr__pfet_01v8 L=150n  W=540n
-
-m3 out downb in_3 in_3 sky130_fd_pr__pfet_01v8 L=150n  W=420n
-
-m4 out up 7 7 sky130_fd_pr__nfet_01v8 L=150n  W=420n
-
-m5 7 8 vss vss sky130_fd_pr__nfet_01v8 L=150n  W=540n
-
-m6 8 8 vss vss sky130_fd_pr__nfet_01v8 L=150n  W=420n
-
-m7 9 dn in_3 in_3 sky130_fd_pr__pfet_01v8 L=150n  W=540n
-m8 9 9 vss vss sky130_fd_pr__nfet_01v8 L=150n  W=420n
-
-m11 up upb vdd vdd sky130_fd_pr__pfet_01v8 L=150n  W=720n
-
-m12 up upb vss vss sky130_fd_pr__nfet_01v8 L=150n  W=420n
-m13 dn downb vdd vdd sky130_fd_pr__pfet_01v8 L=150n  W=720n
-
-m14 dn downb vss vss sky130_fd_pr__nfet_01v8 L=150n  W=420n
-
-m9 10 10 vdd vdd sky130_fd_pr__pfet_01v8 L=150n  W=420n
-
-m10 10 upb 7 7 sky130_fd_pr__nfet_01v8 L=150n  W=540n
-
+m1 in_2 in_2 vdd vdd sky130_fd_pr__pfet_01v8 L=150e-9 W=21e-7
+m2 in_3 in_2 vdd vdd sky130_fd_pr__pfet_01v8 L=150e-9  W=21e-7
+m3 out downb in_3 in_3 sky130_fd_pr__pfet_01v8 L=150e-9  W=21e-7
+m4 out up 7 7 sky130_fd_pr__nfet_01v8 L=150e-9  W=21e-7
+m5 7 8 vss vss sky130_fd_pr__nfet_01v8 L=150e-9  W=21e-7
+m6 8 8 vss vss sky130_fd_pr__nfet_01v8 L=150e-9  W=21e-7
+m7 9 dn in_3 in_3 sky130_fd_pr__pfet_01v8 L=150e-9  W=21e-7
+m8 9 9 vss vss sky130_fd_pr__nfet_01v8 L=150e-9  W=21e-7
+m11 up upb vdd vdd sky130_fd_pr__pfet_01v8 L=150e-9  W=21e-7
+m12 up upb vss vss sky130_fd_pr__nfet_01v8 L=150e-9  W=21e-7
+m13 dn downb vdd vdd sky130_fd_pr__pfet_01v8 L=150e-9  W=21e-7
+m14 dn downb vss vss sky130_fd_pr__nfet_01v8 L=150e-9  W=21e-7
+m9 10 10 vdd vdd sky130_fd_pr__pfet_01v8 L=150e-9  W=21e-7
+m10 10 upb 7 7 sky130_fd_pr__nfet_01v8 L=150e-9  W=21e-7
 .ends cp
 
 ```
@@ -232,12 +209,7 @@ Then goto tkcon and type `ext2spice`
 
 - post layout spice file is created in work directory
 
-<img width="1108" alt="image" src="https://user-images.githubusercontent.com/110079648/206183100-12dc9b4a-0baa-4b48-a233-ff3c780942ea.png">
 
-
-
-# FUTURE WORK:
-POST LAYOUT SIMULATIONS ARE NOT EXACTLY MATCHING. HAVE TO DEBUG AT EVERY TRANSISTOR AND IDENTFY WHERE IT IS FAILING
 # AUTHORS
 -  *SAI ANVITH VATTIKUTI IMT2018528*, International Institute of Information Technology, Bangalore
 # Contributers
