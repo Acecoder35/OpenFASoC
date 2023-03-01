@@ -194,9 +194,7 @@ export PDK_ROOT=/path/to/your/pdks/
 # I have used pdks Sky130 pdks from openlane
 ```
 
-Then type `magic` in terminal which open magic.
-
-<img width="709" alt="image" src="https://user-images.githubusercontent.com/110079648/206182263-18c830ac-5983-4ffb-8e6b-eb39a8f6db1e.png">
+- Then type `magic` in terminal which open magic.
 
 - Then goto file and press read GDS and select our gds file
 
