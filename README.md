@@ -69,7 +69,7 @@ Clone the following Repository inside ALIGN-public directory
 git clone https://github.com/ALIGN-analoglayout/ALIGN-pdk-sky130
 ```
 
-move `SKY130_PDK` folder to `/Users/gopalakrishnareddysanampudi/Documents/GitHub/OpenFASoC/AUXCELL/ALIGN-public/pdks`
+move `SKY130_PDK` folder to `/home/anvith/ALIGN-public/pdks`
 
 #### Running ALIGN TOOL
 
