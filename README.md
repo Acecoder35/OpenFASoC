@@ -155,34 +155,11 @@ m2 voutn vinn 0 0 nmos_rvt w=840e-9 l=150e-9 nf=2
 
 <img width="860" alt="image" src="https://user-images.githubusercontent.com/110079648/199897814-4ac68600-abc6-4ca1-88bb-092bf7098d0f.png">
 
-#### USER EXAMPLE 2
-
-
-![IMAGE 2022-11-05 14:15:13](https://user-images.githubusercontent.com/110079648/200111553-23bbe1ba-7bfe-4aad-9613-06f60cc7a797.jpg)
-
-- Writing netlist from circuit
-```
-.subckt switch dig_in in_1 in_2 Vout N001
-M1 in_1 dig_in Vout Vout nmos_rvt L=180n W=420n nf=2
-M2 Vout N002 in_2 in_2 nmos_rvt L=180n W=420n nf=2
-M4 N002 dig_in 0 0 nmos_rvt L=180n W =420n nf=2
-M5 N002 dig_in N001 N001 pmos_rvt L=180n W=420n nf=2
-M6 in_2 dig_in Vout Vout pmos_rvt L=180n W=420n nf=2
-M3 Vout N002 in_1 in_1 pmos_rvt L=180n W=420n nf=2
-.ends switch
-```
-- .gds file
-
-<img width="728" alt="image" src="https://user-images.githubusercontent.com/110079648/200111690-75c0ed6c-d4fa-447e-be9a-163e75659ac3.png">
-
-- .lef file
-
-<img width="799" alt="image" src="https://user-images.githubusercontent.com/110079648/200111738-1560bd25-79d3-499c-b751-52f698d74aa9.png">
 
 # DESIGNING AUX CELLS FOR PLL
 Source Repo for SPICE FILES - https://github.com/lakshmi-sathi/avsdpll_1v8
 
-## 1 - Charge Pump - GOPALA KRISHNA REDDY
+## 1 - Charge Pump
 
 ### Circuit:
 
@@ -228,125 +205,6 @@ m10 10 upb 7 7 sky130_fd_pr__nfet_01v8 L=150n  W=540n
 
 <img width="392" alt="image" src="https://user-images.githubusercontent.com/110079648/206165962-119ae4a0-7a0e-49b7-ab17-887c266b3223.png">
 
-## 2 - FREQUENCY DIVIDER - RAVI KIRAN REDDY
-
-### Circuit:
-
-<img width="477" alt="image" src="https://user-images.githubusercontent.com/110079648/206166559-20968ba3-b5af-4ab5-ae7e-066910dc645a.png">
-
-```
-
-.subckt FD Clk vout Clkb
-
-xm1 3 2 vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=840n
-xm2 3 2 0 0 sky130_fd_pr__nfet_01v8 l=150n w=420n
-
-xm3 3 Clkb 4 vdd sky130_fd_pr__pfet_01v8 l=150n w=420n
-xm4 3 Clk 4 0 sky130_fd_pr__nfet_01v8 l=150n w=840n
-
-xm7 5 4 vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=840n
-xm8 5 4 0 0 sky130_fd_pr__nfet_01v8 l=150n w=420n
-
-xm9 5 Clk vout vdd sky130_fd_pr__pfet_01v8 l=150n w=420n
-xm10 5 Clkb vout 0 sky130_fd_pr__nfet_01v8 l=150n w=840n
-
-xm11 2 vout vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=840n
-xm12 2 vout 0 0 sky130_fd_pr__nfet_01v8 l=150n w=420n
-
-*xm13 Clkb Clk vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=840n
-*xm14 Clkb Clk 0 0 sky130_fd_pr__nfet_01v8 l=150n w=420n
-
-
-.ends FD
-
-```
-### .GDS
-<img width="205" alt="image" src="https://user-images.githubusercontent.com/110079648/206166922-10cdd372-0b6b-41e7-a790-7c9eb85d77e3.png">
-
-### .LEF
-<img width="160" alt="image" src="https://user-images.githubusercontent.com/110079648/206169385-e4423db6-95e8-44d3-8862-20f5e9cf55a6.png">
-
-## 3 - PHASE DETECTOR - RAVI KIRAN REDDY
-### Circuit:
-
-<img width="505" alt="image" src="https://user-images.githubusercontent.com/110079648/206167477-9d10a1c7-966c-465d-a7d5-919697ca0a94.png">
-
-
-```
-.subckt PD CLKref CLKvco up down vss vdd
-
-xm1 3 CLKref vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=640n
-xm2 3 CLKref 4 vss sky130_fd_pr__nfet_01v8 l=150n w=1800n
-xm3 4 CLKvco vss vss sky130_fd_pr__nfet_01v8 l=150n w=420n
-
-xm4 6 CLKvco vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=640n
-xm5 6 CLKvco 7 vss sky130_fd_pr__nfet_01v8 l=150n w=1800n
-xm6 7 CLKref vss vss sky130_fd_pr__nfet_01v8 l=150n w=420n
-
-xm7 up1 CLKref 3 vss sky130_fd_pr__nfet_01v8 l=150n w=840n
-xm8 clk1 clk1 up1 up1 sky130_fd_pr__pfet_01v8 l=150n w=640n
-xm11 upb up1 vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=720n
-xm12 upb up1 vss vss sky130_fd_pr__nfet_01v8 l=150n w=420n
-xm15 up upb vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=960n
-xm16 up upb vss vss sky130_fd_pr__nfet_01v8 l=150n w=480n
-xm9 dn1 clk2 6 6 sky130_fd_pr__nfet_01v8 l=150n w=840n
-xm10 clk2 clk2 dn1 dn1 sky130_fd_pr__pfet_01v8 l=150n w=640n
-xm13 downb dn1 vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=720n
-xm14 downb dn1 vss vss sky130_fd_pr__nfet_01v8 l=150n w=420n
-xm17 down downb vdd vdd sky130_fd_pr__pfet_01v8 l=150n w=960n
-xm18 down downb vss vss sky130_fd_pr__nfet_01v8 l=150n w=480n
-
-.ends PD
-
-```
-### .GDS
-
-<img width="1066" alt="image" src="https://user-images.githubusercontent.com/110079648/206167617-6398b2ba-2121-45d5-a722-ac98b90a4104.png">
-
-### .LEF
-
-<img width="1069" alt="image" src="https://user-images.githubusercontent.com/110079648/206167892-c6046aea-2805-467e-a135-58f1746c1708.png">
-
-## 4 - VOLTAGE CONTROLLED OSCILLATOR - GANDI AJAY KUMAR
-### Circuit:
-
-<img width="600" alt="image" src="https://user-images.githubusercontent.com/110079648/206168206-0995b027-e6e4-48a2-913a-294f6e441d59.png">
-
-```
-.subckt VCO in out VSS VDD
-.include /home/ajaykumar/Downloads/spicelib/sky130.lib
-xm1 3 16 10 10 sky130_fd_pr__pfet_01v8 l=150n w=420n
-xm2 3 16 9 9 sky130_fd_pr__nfet_01v8 l=150n w=420n
-xm3 4 3 10 10 sky130_fd_pr__pfet_01v8 l=150n w=420n
-xm4 4 3 9 9 sky130_fd_pr__nfet_01v8 l=150n w=420n
-xm5 vout 4 10 10 sky130_fd_pr__pfet_01v8 l=150n w=420n
-xm6 vout 4 9 9 sky130_fd_pr__nfet_01v8 l=150n w=420n
-xm11 13 vout 10 10 sky130_fd_pr__pfet_01v8 l=150n w=420n
-xm12 13 vout 9 9 sky130_fd_pr__nfet_01v8 l=150n w=420n
-xm13 14 13 10 10 sky130_fd_pr__pfet_01v8 l=150n w=420n
-xm14 14 13 9 9 sky130_fd_pr__nfet_01v8 l=150n w=420n
-xm15 15 14 10 10 sky130_fd_pr__pfet_01v8 l=150n w=420n
-xm16 15 14 9 9 sky130_fd_pr__nfet_01v8 l=150n w=420n
-xm17 16 15 10 10 sky130_fd_pr__pfet_01v8 l=150n w=2400n
-xm18 16 15 9 9 sky130_fd_pr__nfet_01v8 l=150n w=1200n
-xm7 10 5 VDD VDD sky130_fd_pr__pfet_01v8 l=150n w=1080n
-xm8 5 5 VDD VDD sky130_fd_pr__pfet_01v8 l=150n w=1080n
-xm9 5 in VSS VSS sky130_fd_pr__nfet_01v8 l=150n w=840n
-xm10 9 in VSS VSS sky130_fd_pr__nfet_01v8 l=150n w=1080n
-xm19 11 16 VDD VDD sky130_fd_pr__pfet_01v8 l=150n w=720n
-xm20 11 16 VSS VSS sky130_fd_pr__nfet_01v8 l=150n w=420n
-xm21 out 11 VDD VDD sky130_fd_pr__pfet_01v8 l=150n w=720n
-xm22 out 11 VSS VSS sky130_fd_pr__nfet_01v8 l=150n w=420n
-.ends VCO
-
-```
-### .GDS
-
-<img width="416" alt="image" src="https://user-images.githubusercontent.com/110079648/206168470-f440549a-b9f5-4ff4-98bd-f4f21a0e8e33.png">
-
-### .LEF
-
-<img width="413" alt="image" src="https://user-images.githubusercontent.com/110079648/206168558-88c2f766-1b2e-48b0-9173-baa140b6bdd4.png">
 
 # POST LAYOUT SIMULATIONS
 Magic Tool is used to post layout Spice file. SPICE file can be simulated in NGSPICE and compare with prelayout.
@@ -381,7 +239,7 @@ Then goto tkcon and type `ext2spice`
 # FUTURE WORK:
 POST LAYOUT SIMULATIONS ARE NOT EXACTLY MATCHING. HAVE TO DEBUG AT EVERY TRANSISTOR AND IDENTFY WHERE IT IS FAILING
 # AUTHORS
--  *SANAMPUDI GOPALA KRISHNA REDDY MT2022527*, Postgraduate Student, International Institute of Information Technology, Bangalore
+-  *SAI ANVITH VATTIKUTI IMT2018528*, International Institute of Information Technology, Bangalore
 # Contributers
 -  *KUNAL GHOSH*, Director, VSD Corp. Pvt. Ltd
 
@@ -390,5 +248,5 @@ POST LAYOUT SIMULATIONS ARE NOT EXACTLY MATCHING. HAVE TO DEBUG AT EVERY TRANSIS
 - Kunal Ghosh, Director, VSD Corp. Pvt. Ltd.
 	
 # REFERENCE 
-
+- GOPALA KRISHNA REDDY github: https://github.com/sanampudig/OpenFASoC/tree/main/AUXCELL
 - Lakshmi S, MS ECE - MAIL: lakshmi.sathi96@gmail.com GITHUB: https://github.com/lakshmi-sathi/avsdpll_1v8
